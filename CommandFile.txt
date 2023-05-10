@@ -1,0 +1,52 @@
+py manage.py shell
+from newsportal.models import *
+
+Задание 1:
+user1 = User.objects.create_user(username='Vasia')
+user2 = User.objects.create_user(username='Petya')
+
+Задание 2:
+Author.objects.create(authorUser=user1)
+Author.objects.create(authorUser=user2)
+author1 = Author.objects.get(id=1)
+author2 = Author.objects.get(id=2)
+
+Задание 3:
+Category.objects.create(name='Mathematics')
+Category.objects.create(name='Physics')
+Category.objects.create(name='Chemistry')
+Category.objects.create(name='Biology')
+
+Задание 4:
+Post.objects.create(author=author1, categoryType='NW', title='news1', text='text1')
+Post.objects.create(author=author2, categoryType='AR', title='article1', text='text2')
+Post.objects.create(author=author2, categoryType='AR', title='article2', text='text3')
+
+Задание 5:
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=3))
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=4))
+
+Задание 6:
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text='commit1')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=1).authorUser, text='commit2')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='commit3')
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=2).authorUser, text='commit4')
+
+Задание 7:
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=2).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=4).dislike()
+Comment.objects.get(id=4).dislike()
+Comment.objects.get(id=4).dislike()
+Post.objects.get(id=1).like()
+Post.objects.get(id=2).like()
+Post.objects.get(id=3).like()
+
+Задание 8:
+author1.update_rating()
+author2.update_rating()
+
